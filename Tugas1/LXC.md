@@ -1,4 +1,4 @@
-# Sistem Terdisribusi
+# Sistem Terdisribusi - Membuat LXC
 
 ## Konfigurasi Web-Server sister.local
 - Instal Ubuntu 22.04.3 LTS pada Microsoft Store
