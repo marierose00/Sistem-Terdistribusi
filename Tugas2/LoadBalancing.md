@@ -91,9 +91,9 @@ sudo nginx -s reload
 ```
 curl -i app.sister.local
 ```
-![curl1](https://github.com/marieroseoo/Sistem-Terdisribusi/assets/150213177/a3f49445-dc73-46b6-8d2b-34e93c4cd6b4)
-![curl2](https://github.com/marieroseoo/Sistem-Terdisribusi/assets/150213177/f5be0846-74ac-4e6b-8071-1c0d0ae26f3e)
-![curl3](https://github.com/marieroseoo/Sistem-Terdisribusi/assets/150213177/1821d88e-38ee-4bad-9ddf-90836bfc49a1)
+![curl1](https://github.com/marieroseoo/Sistem-Terdisribusi/assets/150213177/fb085539-38ee-40df-8837-c40154ecca5b)
+![curl2](https://github.com/marieroseoo/Sistem-Terdisribusi/assets/150213177/f9e4e54e-cddc-450f-b9dc-68ddc3da0cdd)
+![curl3](https://github.com/marieroseoo/Sistem-Terdisribusi/assets/150213177/01f01389-485b-4c79-a603-afbc89b5f897)
 
 - Cek pada browser (NOTE: Untuk masuk ke server yang berbeda cukup lakukan reload pada tab browser)
 ```
