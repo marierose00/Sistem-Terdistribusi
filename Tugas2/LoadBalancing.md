@@ -19,6 +19,8 @@ sudo lxc-start -n microservice5
 ```
 sudo lxc-ls -f
 ```
+![image](https://github.com/marieroseoo/Sistem-Terdisribusi/assets/150213177/e1bdc365-8a79-4c04-a46a-ef20af1d4b56)
+
 
 - IP yang didapat
 ```
