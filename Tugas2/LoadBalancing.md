@@ -61,7 +61,7 @@ nano /var/www/html/index.nginx-debian.html
 ![html5](https://github.com/marieroseoo/Sistem-Terdisribusi/assets/150213177/d2100ea8-ec9f-412e-8155-0b6c935e788a)
 
 
-## Konfigurasi Hosts WSL
+## Konfigurasi Load Balance pada Hosts WSL
 - Kembali ke parents
 
 - Konfigurasi pada hosts parent
