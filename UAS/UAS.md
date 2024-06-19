@@ -2328,11 +2328,12 @@ Andika Putra Ariansyah  (1203210019)
   }
   ```
 - Jalankan ansible-playbook
-  ```
-  ansible-playbook -i hosts install-codeigniter.yml -k
-  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/3af8816a-2e29-4a3f-84f9-02d678c4b7cf)
+  ```ansible-playbook -i hosts install-codeigniter.yml -k```
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/68c99d1d-f1ac-49e7-9d5a-e2551db57c04)
 
-  ```
+  ```ansible-playbook -i hosts install-laravel.yml -k```
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/4e9b97ed-e943-49db-880e-941b374fab2e)
+
   
 - Check the script and restart the nginx.
 
