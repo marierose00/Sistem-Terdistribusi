@@ -1,99 +1,63 @@
-# Report [Team 12] : UAS
+# Laporan Kelompok 7
+Dharma Mar'ie Satoto    (1203210117)
+Andika Putra Ariansyah  (1203210019)
 
-## Case Study
 
-There are for 4 website will be deploy in this final project which is.
 
-- kelompok12.fpsas/ using framework laravel 8 and php 7.4
-- news.kelompok12.fpsas using framework wordpress latest and php 7.4
-
-- kelompok12.fpsas/product using framework yii 2.0 and php 7.4
-
-- kelompok12.fpsas/app using framework codeigniter 3 and php 5.6
-
-Technology will be use.
-- VM Ubuntu 20.04 (using bridge network methods and static ip)
-- Nginx
-- 6 instance LXC ubuntu 20.04 PHP 7.4
-- 2 instance LXC debian 10 PHP 5.6
-- 1 instance LXC debian 10 mariadb server
-- Ansible
-- kelompok12.fpsas/ using laravel 8
-- news.kelompok12.fpsas using wordpress latest version
-- kelompok12.fpsas/product using YII 2.0
-- kelompok12.fpsas/app using Code Igniter 3
-
-load balancer configuration will be use in each website
-
-- kelompok12.fpsas/ 	
-
-  ​	Using load balancer methods Least Connection 4 instance LXC (LXC_PHP7_1, LXC_PHP7_2, LXC_PHP7_4, LXC_PHP7_6)
-
-- news.kelompok12.fpsas
-
-  ​	using load balancer Ip Hash methods 4 instance LXC (LXC_PHP7_2, LXC_PHP7_3, LXC_PHP7_4, LXC_PHP7_5)
-
-- kelompok12.fpsas/product
-
-  ​	using load balancer Weighted Load Balancing methods 5 instance LXC (LXC_PHP7_1 (Weight=3), LXC_PHP7_2 (Weight=2), LXC_PHP7_4 (Weight=4), LXC_PHP7_5 (Weight=1), LXC_PHP7_6 (Weight=6))
-
-- kelompok12.fpsas/app
-
-  ​	using load balancer Round Robin methods 2 instance LXC (LXC_PHP5_1, LXC_PHP5_2)
-
-## Problem Solving
-
-- Create new ubuntu server 20.04 in virtual box and do some configuration in the main sever like setting ip from dhcp to static (192.168.1.19), and installation of some features like nginx, ssh-server and ansible.
-
-- After that, create a lxc according to the required in this final project using code as below.
+- Buat kontainer LXC berikut
+  6 instance LXC ubuntu 20.04 PHP 7.4
+  2 instance LXC debian 10 PHP 5.6
+  1 instance LXC debian 10 mariadb server
 
   - [6 instance lxc (ubuntu 20.04)]
 
     ```
-    sudo lxc-create -n lxc_php7_1 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    sudo lxc-create -n lxc_php7_1 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --server images.linuxcontainers.org
     
-    sudo lxc-create -n lxc_php7_2 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    sudo lxc-create -n lxc_php7_2 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --server images.linuxcontainers.org
     
-    sudo lxc-create -n lxc_php7_3 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    sudo lxc-create -n lxc_php7_3 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --server images.linuxcontainers.org
     
-    sudo lxc-create -n lxc_php7_4 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    sudo lxc-create -n lxc_php7_4 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --server images.linuxcontainers.org
     
-    sudo lxc-create -n lxc_php7_5 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    sudo lxc-create -n lxc_php7_5 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --server images.linuxcontainers.org
     
-    sudo lxc-create -n lxc_php7_6 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    sudo lxc-create -n lxc_php7_6 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --server images.linuxcontainers.org
     ```
 
   - [2 instance lxc (debian 10)]
 
     ```
-    sudo lxc-create -n lxc_php5_1 -t download -- --dist debian --release buster --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    sudo lxc-create -n lxc_php5_1 -t download -- --dist debian --release buster --arch amd64 --force-cache --server images.linuxcontainers.org
     
-    sudo lxc-create -n lxc_php5_2 -t download -- --dist debian --release buster --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    sudo lxc-create -n lxc_php5_2 -t download -- --dist debian --release buster --arch amd64 --force-cache --server images.linuxcontainers.org
     ```
 
   - [1 instance lxc  for mariadb (debian 10)]
 
     ```
-    sudo lxc-create -n lxc_mariadb -t download -- --dist debian --release buster --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    sudo lxc-create -n lxc_mariadb -t download -- --dist debian --release buster --arch amd64 --force-cache --server images.linuxcontainers.org
     ```
 
-- Then, we need to do some configuration to settings static ip and install ssh server in each lxc. In this case we doing some configuration ip like the picture as below.
+- Kemudian, kita perlu melakukan konfigurasi menginstal server ssh di setiap lxc. Dalam hal ini kita melakukan beberapa konfigurasi ip seperti gambar di bawah ini.
 
-  ![ls](/Assets/ls.png)
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/5d5fcb65-2ffd-448e-97d2-dca9012ab327)
 
-- Register the domain of the each lxc in the `sudo nano /etc/hosts` like the picture below.
 
-  ![etc](/Assets/etc.png)
+- Tambahkan domain masing-masing lxc di `sudo nano /etc/hosts` seperti gambar di bawah ini.
 
-- Now, we need to write some ansible script to do frame installation in each lxc just like the requirements in the case study.
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/ea4ffdde-2140-439c-ab4b-a61c179a71cc)
 
-  - first we will create folder in the ansible directory `sudo mkdir -p ~/ansible/tubes` to accommodate all the configuration script that we will be used in this final project.
 
-  - In the tubes directory, create roles directory to accommodate all the script in each framework that will be installed in this project.  
+- Sekarang, kita perlu menulis beberapa skrip yang memungkinkan untuk melakukan instalasi frame di setiap lxc seperti persyaratan.
 
-  - create a laravel directory in the roles directory `sudo mkdir laravel` to accommodate an ansible script to install laravel framewrok.  
+  - pertama kita akan membuat folder di direktori yang memungkinkan `sudo mkdir -p ~/ansible/tubes` untuk menampung semua konfigurasi script yang akan kita gunakan.
 
-    - In the laravel dircetory, we need 3 folders again to accommodate tasks, handlers and templates scripts that will be use in the laravel installation.
+  - Pada direktori tubes, buatlah direktori role untuk menampung seluruh script pada setiap framework yang akan dipasang pada proyek ini.  
+
+  - buat direktori laravel di direktori peran `sudo mkdir laravel` untuk mengakomodasi skrip yang memungkinkan untuk menginstal framewrok laravel.  
+
+    - Pada direktori laravel, kita membutuhkan 3 folder lagi untuk menampung task, handler dan script templates yang akan digunakan pada instalasi laravel.
 
       ```
       sudo mkdir -p laravel/tasks
@@ -101,7 +65,7 @@ load balancer configuration will be use in each website
       sudo mkdir -p laravel/templates
       ```
 
-    - In the tasks directory, create some file named main.yml. Then type the script as below.
+    - Di direktori tasks, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -179,7 +143,7 @@ load balancer configuration will be use in each website
           state: present
       ```
 
-    - In the handlers directory, create some file named main.yml. Then type the script as below.
+    - Di direktori handlers, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -196,7 +160,7 @@ load balancer configuration will be use in each website
         action: service name=nginx state=restarted
       ```
 
-    - In the templates directory, we will create 3 script files as below.
+    - Pada direktori templates, kita akan membuat 3 file script seperti di bawah ini.
 
       - env.templates
 
@@ -205,14 +169,14 @@ load balancer configuration will be use in each website
         APP_ENV=local
         APP_KEY=
         APP_DEBUG=true
-        APP_URL=http://kelompok12.fpsas
+        APP_URL=http://kelompok7.local
         
         LOG_CHANNEL=stack
         LOG_DEPRECATIONS_CHANNEL=null
         LOG_LEVEL=debug
         
         DB_CONNECTION=mysql
-        DB_HOST=10.0.3.100
+        DB_HOST=10.0.3.201
         DB_PORT=3306
         DB_DATABASE=landing
         DB_USERNAME=admin
@@ -678,9 +642,9 @@ load balancer configuration will be use in each website
         ;php_admin_value[memory_limit] = 32M
         ```
 
-    - Then, we need to create a folder named php to accommodate php installation in the laravel roles. In this roles, we just need to create 2 directory named handlers and tasks.
+    - Kemudian, kita perlu membuat folder bernama php untuk mengakomodasi instalasi php di role php. Dalam role ini, kita hanya perlu membuat 2 direktori bernama handlers dan task.
 
-      - In the tasks directory, create some file named main.yml. Then type the script as below.
+      - Di direktori tasks, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
         ```
         ---
@@ -719,7 +683,7 @@ load balancer configuration will be use in each website
             - restart php
         ```
 
-      - In the handlers directory, create some file named main.yml. Then type the script as below.
+      - Di direktori handlers, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
         ```
         ---
@@ -736,9 +700,9 @@ load balancer configuration will be use in each website
           action: service name=nginx state=restarted
         ```
 
-  - create a codeigniter directory in the roles directory `sudo mkdir codeigniter` to accommodate an ansible script to install codeigniter framewrok.  
+  - buat direktori codeigniter di direktori roles `sudo mkdir codeigniter` untuk mengakomodasi skrip yang memungkinkan untuk menginstal framewrok codeigniter.  
 
-    - In the codeigniter dircetory, we need 3 folders again to accommodate tasks, handlers and templates scripts that will be use in the codeigniter installation.
+    - Pada direktori codeigniter, kita memerlukan 3 folder lagi untuk menampung tasks, handler dan templates yang akan digunakan dalam instalasi codeigniter.
 
       ```
       sudo mkdir -p codeigniter/tasks
@@ -746,7 +710,7 @@ load balancer configuration will be use in each website
       sudo mkdir -p codeigniter/templates
       ```
 
-    - In the tasks directory, create some file named main.yml. Then type the script as below.
+    - Di direktori tasks, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -840,7 +804,7 @@ load balancer configuration will be use in each website
           state: present
       ```
 
-    - In the handlers directory, create some file named main.yml. Then type the script as below.
+    - Di direktori handlers, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -857,7 +821,7 @@ load balancer configuration will be use in each website
         action: service name=php5.6-fpm state=restarted
       ```
 
-    - In the templates directory, create some file named app.conf  . Then type the script as below.
+    - Di direktori templates, buat beberapa file bernama app.conf . Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       server {
@@ -877,8 +841,8 @@ load balancer configuration will be use in each website
       }
       ```
 
-  - create a db directory in the roles directory `sudo mkdir db` to accommodate an ansible script to install db framewrok.  
-    - In the db dircetory, we need 3 folders again to accommodate tasks, handlers and templates scripts that will be use in the db installation.
+  - buat direktori db di direktori roles `sudo mkdir db` untuk mengakomodasi skrip yang memungkinkan untuk menginstal db framewrok.  
+    - Pada direktori db, kita memerlukan 3 folder lagi untuk menampung tasks, handler dan templates yang akan digunakan dalam instalasi db.
 
       ```
       sudo mkdir -p db/tasks
@@ -886,7 +850,7 @@ load balancer configuration will be use in each website
       sudo mkdir -p db/templates
       ```
 
-    - In the tasks directory, create some file named main.yml. Then type the script as below.
+    - Di direktori tasks, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -964,7 +928,7 @@ load balancer configuration will be use in each website
           state: present
       ```
 
-    - In the handlers directory, create some file named main.yml. Then type the script as below.
+    - Di direktori handlers, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -975,7 +939,7 @@ load balancer configuration will be use in each website
         action: service name=mysql state=restarted
       ```
 
-    - In the templates directory,  create some file named my.cnf. Then type the script as below.
+    - Di direktori templates, buat beberapa file bernama my.cnf. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       #
@@ -1109,9 +1073,9 @@ load balancer configuration will be use in each website
       [mariadb]
       ```
 
-    - Then, we need to create a folder named pma to accommodate pma installation in the pma roles. In this roles, we just need to create 3 directory named tasks, handlers and templates.
+    - Kemudian, kita perlu membuat folder bernama pma untuk mengakomodasi instalasi pma di peran pma. Dalam peran ini, kita hanya perlu membuat 3 direktori bernama tasks, handlers, dan templates.
 
-      - In the tasks directory, create some file named main.yml. Then type the script as below.
+      - Di direktori tasks, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
         ```
         ---
@@ -1206,7 +1170,7 @@ load balancer configuration will be use in each website
             state: present
         ```
 
-      - In the handlers directory, create some file named main.yml. Then type the script as below.
+      - Di direktori handlers, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
         ```
         ---
@@ -1229,7 +1193,7 @@ load balancer configuration will be use in each website
           action: service name=php7.2-fpm state=restarted
         ```
 
-      - In the templates directory, create some file named pma.local . Then type the script as below.
+      - Di direktori templates, buat beberapa file bernama pma.local . Lalu ketikan scriptnya seperti di bawah ini.
 
         ```
         server {
@@ -1269,17 +1233,17 @@ load balancer configuration will be use in each website
           }
         ```
 
-  - create a wordpress directory in the roles directory `sudo mkdir wordpress` to accommodate an ansible script to install wordpress framewrok.  
+  - buat direktori wordpress di direktori roles `sudo mkdir wordpress` untuk mengakomodasi skrip yang memungkinkan untuk menginstal framewrok wordpress.  
 
-    - In the wordpress dircetory, we need 3 folders again to accommodate tasks, handlers and templates scripts that will be use in the wordpress installation.
+    - Pada direktori wordpress, kita memerlukan 3 folder lagi untuk menampung tasks, handlers dan templates yang akan digunakan dalam instalasi wordpress.
 
       ```
-      sudo mkdir -p wordpress /tasks
-      sudo mkdir -p wordpress /handlers
-      sudo mkdir -p wordpress /templates
+      sudo mkdir -p wordpress/tasks
+      sudo mkdir -p wordpress/handlers
+      sudo mkdir -p wordpress/templates
       ```
 
-    - In the tasks directory, create some file named main.yml. Then type the script as below.
+    - Di direktori tasks, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -1363,7 +1327,7 @@ load balancer configuration will be use in each website
           - restart php
       ```
 
-    - In the handlers directory, create some file named main.yml. Then type the script as below.
+    - Di direktori handlers, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -1380,7 +1344,7 @@ load balancer configuration will be use in each website
         action: service name=php7.4-fpm state=restarted
       ```
 
-    - In the templates directory, we will create 3 script files as below.
+    - Pada direktori templates, kita akan membuat 3 file script seperti di bawah ini.
 
       - php7.conf
 
@@ -1828,8 +1792,8 @@ load balancer configuration will be use in each website
          * @package WordPress
          */
         
-        define( 'WP_HOME', 'http://news.kelompok12.fpsas' );
-        define( 'WP_SITEURL', 'http://news.kelompok12.fpsas' );
+        define( 'WP_HOME', 'http://news.kelompok7.local' );
+        define( 'WP_SITEURL', 'http://news.kelompok7.local' );
         
         // ** MySQL settings - You can get this info from your web host ** //
         /** The name of the database for WordPress */
@@ -1842,7 +1806,7 @@ load balancer configuration will be use in each website
         define( 'DB_PASSWORD', 'admin' );
         
         /** MySQL hostname */
-        define( 'DB_HOST', '10.0.3.100:3306' );
+        define( 'DB_HOST', '10.0.3.201:3306' );
         /** Database charset to use in creating database tables. */
         define( 'DB_CHARSET', 'utf8' );
         
@@ -1907,17 +1871,17 @@ load balancer configuration will be use in each website
         require_once ABSPATH . 'wp-settings.php';
         ```
 
-  - create a yii directory in the roles directory `sudo mkdir yii` to accommodate an ansible script to install yii framewrok.  
+  - buat direktori yii di direktori roles `sudo mkdir yii` untuk mengakomodasi skrip yang memungkinkan untuk menginstal framewrok yii.  
 
-    - In the yii directory, we need 3 folders again to accommodate tasks, handlers and templates scripts that will be use in the yii installation.
+    - Di direktori yii, kita memerlukan 3 folder lagi untuk menampung tasks, handlers, dan templates yang akan digunakan dalam instalasi yii.
 
       ```
-      sudo mkdir -p yii /tasks
-      sudo mkdir -p yii /handlers
-      sudo mkdir -p yii /templates
+      sudo mkdir -p yii/tasks
+      sudo mkdir -p yii/handlers
+      sudo mkdir -p yii/templates
       ```
 
-    - In the tasks directory, create some file named main.yml. Then type the script as below.
+    - Di direktori tasks, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -1983,7 +1947,7 @@ load balancer configuration will be use in each website
           state: present
       ```
 
-    - In the handlers directory, create some file named main.yml. Then type the script as below.
+    - Di direktori handlers, buat beberapa file bernama main.yml. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       ---
@@ -2000,7 +1964,7 @@ load balancer configuration will be use in each website
         action: service name=nginx state=restarted
       ```
 
-    -  In the templates directory, create some file named yii.conf. Then type the script as below.
+    -  Di direktori templates, buat beberapa file bernama yii.conf. Lalu ketikan scriptnya seperti di bawah ini.
 
       ```
       server {
@@ -2054,43 +2018,43 @@ load balancer configuration will be use in each website
       }
       ```
 
-- After that, we need to create some file to running the configuration that was we made in the roles directory.
+- ASetelah itu, kita perlu membuat beberapa file untuk menjalankan konfigurasi yang telah kita buat di direktori roles.
 
-  - Create file named hosts `nano hosts` and type script as below.
+  - Buat file bernama hosts `nano hosts` dan ketik skrip seperti di bawah ini.
 
     ```
     [laravel]
-    laravel ansible_host=lxc_laravel.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_1L ansible_host=lxc_php7_1L.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_2L ansible_host=lxc_php7_2L.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_4L ansible_host=lxc_php7_4L.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_6L ansible_host=lxc_php7_6L.dev ansible_ssh_user=root ansible_become_pass=akbar
+    laravel ansible_host=lxc_laravel.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_1L ansible_host=lxc_php7_1L.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_2L ansible_host=lxc_php7_2L.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_4L ansible_host=lxc_php7_4L.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_6L ansible_host=lxc_php7_6L.dev ansible_ssh_user=root ansible_become_pass=1
     
     [codeigniter]
-    codeigniter ansible_host=lxc_codeigniter.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php5_1 ansible_host=lxc_php5_1.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php5_2 ansible_host=lxc_php5_2.dev ansible_ssh_user=root ansible_become_pass=akbar
+    codeigniter ansible_host=lxc_codeigniter.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php5_1 ansible_host=lxc_php5_1.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php5_2 ansible_host=lxc_php5_2.dev ansible_ssh_user=root ansible_become_pass=1
     
     [wordpress]
-    wordpress ansible_host=lxc_wordpress.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_2W ansible_host=lxc_php7_2W.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_3W ansible_host=lxc_php7_3W.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_4W ansible_host=lxc_php7_4W.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_5W ansible_host=lxc_php7_5W.dev ansible_ssh_user=root ansible_become_pass=akbar
+    wordpress ansible_host=lxc_wordpress.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_2W ansible_host=lxc_php7_2W.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_3W ansible_host=lxc_php7_3W.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_4W ansible_host=lxc_php7_4W.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_5W ansible_host=lxc_php7_5W.dev ansible_ssh_user=root ansible_become_pass=1
     
     [yii]
-    yii ansible_host=lxc_yii.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_1Y ansible_host=lxc_php7_1Y.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_2Y ansible_host=lxc_php7_2Y.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_4Y ansible_host=lxc_php7_4Y.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_5Y ansible_host=lxc_php7_5Y.dev ansible_ssh_user=root ansible_become_pass=akbar
-    lxc_php7_6Y ansible_host=lxc_php7_6Y.dev ansible_ssh_user=root ansible_become_pass=akbar
+    yii ansible_host=lxc_yii.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_1Y ansible_host=lxc_php7_1Y.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_2Y ansible_host=lxc_php7_2Y.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_4Y ansible_host=lxc_php7_4Y.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_5Y ansible_host=lxc_php7_5Y.dev ansible_ssh_user=root ansible_become_pass=1
+    lxc_php7_6Y ansible_host=lxc_php7_6Y.dev ansible_ssh_user=root ansible_become_pass=1
     
     [database]
-    lxc_mariadb ansible_host=lxc_mariadb.dev ansible_ssh_user=root ansible_become_pass=akbar
+    lxc_mariadb ansible_host=lxc_mariadb.dev ansible_ssh_user=root ansible_become_pass=1
     ```
 
-  - Create file named install-codeigniter.yml `nano install-codeigniter.yml` and type script as below.
+  - Buat file bernama install-codeigniter.yml `nano install-codeigniter.yml` dan ketik skrip seperti di bawah ini.
 
     ```
     ---
@@ -2119,7 +2083,7 @@ load balancer configuration will be use in each website
         - app
     ```
 
-  - Create file named install-laravel.yml `nano install-laravel.yml` and type script as below.
+  - Buat file bernama install-laravel.yml `nano install-laravel.yml` dan ketik skrip seperti di bawah ini.
 
     ```
     ---
@@ -2169,7 +2133,7 @@ load balancer configuration will be use in each website
         - laravel
     ```
 
-  - Create file named install-mariadb.yml `nano install-mariadb.yml` and type script as below.
+  - Buat file bernama install-mariadb.yml `nano install-mariadb.yml` dan ketik skrip seperti di bawah ini.
 
     ```
     - hosts: database
@@ -2182,7 +2146,7 @@ load balancer configuration will be use in each website
         - pma
     ```
 
-  - Create file named install-wordpress.yml `nano install-wordpress.yml` and type script as below.
+  - Buat file bernama install-wordpress.yml `nano install-wordpress.yml` dan ketik skrip seperti di bawah ini.
 
     ```
     ---
@@ -2227,7 +2191,7 @@ load balancer configuration will be use in each website
         - wordpress
     ```
 
-  - Create file named install-yii.yml `nano install-yii.yml` and type script as below.
+  - Buat file bernama install-yii.yml `nano install-yii.yml` dan ketik skrip seperti di bawah ini.
 
     ```
     ---
@@ -2286,7 +2250,7 @@ load balancer configuration will be use in each website
         - yii
     ```
 
-- Then for the last, we need to configuration the nginx settings. Go to the sites-available `cd /etc/nginx/sites-available` and create file named kelompok12.fpsas. Enter the file using `sudo nano kelompok12.fpsas` and type script as below to settings the nginx include load balancer configurations.
+- Kemudian yang terakhir, kita perlu mengkonfigurasi pengaturan nginx. Kunjungi situs-situs yang tersedia `cd /etc/nginx/sites-available` dan buat file bernama kelompok7.local. Masukkan file menggunakan `sudo nano kelompok7.local` dan ketik skrip seperti di bawah ini untuk mengatur nginx termasuk konfigurasi penyeimbang beban.
 
   ```
   upstream laravel {
@@ -2322,7 +2286,7 @@ load balancer configuration will be use in each website
           listen 80;
           listen [::]:80;
   
-          server_name kelompok12.fpsas;
+          server_name kelompok7.local;
   
           root /var/www/html;
           index index.html;
@@ -2352,7 +2316,7 @@ load balancer configuration will be use in each website
           listen 80;
           listen [::]:80;
   
-          server_name news.kelompok12.fpsas;
+          server_name news.kelompok7.local;
   
           root /var/www/html;
           index index.html;
@@ -2363,6 +2327,12 @@ load balancer configuration will be use in each website
           }
   }
   ```
+- Jalankan ansible-playbook
+  ```
+  ansible-playbook -i hosts install-codeigniter.yml -k
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/3af8816a-2e29-4a3f-84f9-02d678c4b7cf)
+
+  ```
   
 - Check the script and restart the nginx.
 
@@ -2372,83 +2342,3 @@ load balancer configuration will be use in each website
   sudo service nginx restart
   ```
 
-- Now, we can check it our configuration in the browser by type the name of our domain (http://kelompok12.fpsas).
-
-  - laravel (kelompok12.fpsas/)
-
-    ![Tampilan Laravel](/Assets/TampilanLaravel.png)
-
-  - wordpress (news.kelompok12.fpsas)
-
-    ![Tampilan News](/Assets/TampilanNews.png)
-
-  - codeigniter (kelompok12.fpsas/app)
-
-    ![Tanpilan App](/Assets/TanpilanApp.png)
-
-  - yii (kelompok12.fpsas/product)
-
-    ![Tampilan Yii](/Assets/TampilanYii.png)
-
-  - phpmyadmin (kelompok12.fpsas/phpmyadmin/)
-
-    ![Tampilan PhpmyAdmin](/Assets/TampilanPhpmyAdmin.png)
-
-
-
-## Analisa 
-
-- 50 user scheme
-
-  - Before using load balancer
-
-    ![B 10](/Assets/B10.png)
-
-  - After using load balancer
-
-    ![A 10](/Assets/A10.png)
-
-- 150 user scheme
-
-  - Before using load balancer
-
-    ![B 150](/Assets/B150.png)
-
-  - After using load balancer
-
-    ![A 150](/Assets/A150.png)
-
-- 300 user scheme
-
-  - Before using load balancer
-
-    ![B 300](/Assets/B300.png)
-
-  - After using load balancer
-
-    ![A 300](/Assets/A300.png)
-
-- 500 user scheme
-
-  - Before using load balancer
-
-    ![B 500](/Assets/B500.png)
-
-  - After using load balancer
-
-    ![A 500](/Assets/A500.png)
-
-Analisis 
-
-1. Table data throughput and user in the load testing before and after using load balancer.
-
-   ![analisis12](/Assets/analisis12.jpeg)
-
-2. reduce the throughput value and increase the value of the number of users that can be served every second for the schema that has been created
-   - reduce lxc that we use to load balancer 
-   - Downgrade OS
-   - unoptimized database 
-
-##  Created By Team 12 [IT - 02 - 02]
-- Muhammad Akbar Ramadhan [1202190019]
-- Wiranti Maharani [1202190030]
