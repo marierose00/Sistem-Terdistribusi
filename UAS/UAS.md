@@ -1,6 +1,6 @@
 # Laporan Kelompok 7
-Dharma Mar'ie Satoto    (1203210117)
-Andika Putra Ariansyah  (1203210019)
+- Dharma Mar'ie Satoto    (1203210117)
+- Andika Putra Ariansyah  (1203210019)
 
 
 
@@ -2333,6 +2333,15 @@ Andika Putra Ariansyah  (1203210019)
 
   ```ansible-playbook -i hosts install-laravel.yml -k```
   ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/4e9b97ed-e943-49db-880e-941b374fab2e)
+
+  ```ansible-playbook -i hosts install-mariadb.yml -k```
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/5095c1db-8205-477c-99fe-b6fa4c315896)
+
+  ```ansible-playbook -i hosts install-wordpress.yml -k```
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/b4c2a9d9-6eca-4f34-80d6-74d204463f49)
+
+  ```ansible-playbook -i hosts install-yii.yml -k```
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/9205bd9d-dd4b-4df0-8fb7-436a0b22eab6)
 
   
 - Check the script and restart the nginx.
