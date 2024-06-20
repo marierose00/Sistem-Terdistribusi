@@ -1,8 +1,4 @@
-# Laporan Kelompok 7
-- Dharma Mar'ie Satoto    (1203210117)
-- Andika Putra Ariansyah  (1203210019)
-
-
+# Laporan Kelompok 7 - Dharma Mar'ie Satoto (1203210117) & Andika Putra Ariansyah (1203210019)
 
 - Buat kontainer LXC berikut
   6 instance LXC ubuntu 20.04 PHP 7.4
@@ -2328,14 +2324,14 @@
   }
   ```
 - Jalankan ansible-playbook
+  ```ansible-playbook -i hosts install-mariadb.yml -k```
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/508d4a87-25d8-401a-a40e-3076ded83cbf)
+
   ```ansible-playbook -i hosts install-codeigniter.yml -k```
   ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/68c99d1d-f1ac-49e7-9d5a-e2551db57c04)
 
   ```ansible-playbook -i hosts install-laravel.yml -k```
   ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/4e9b97ed-e943-49db-880e-941b374fab2e)
-
-  ```ansible-playbook -i hosts install-mariadb.yml -k```
-  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/5095c1db-8205-477c-99fe-b6fa4c315896)
 
   ```ansible-playbook -i hosts install-wordpress.yml -k```
   ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/b4c2a9d9-6eca-4f34-80d6-74d204463f49)
