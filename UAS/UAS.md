@@ -2330,9 +2330,9 @@
   ```ansible-playbook -i hosts install-laravel.yml -k```
   ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/273e3a52-fae1-4e2a-b12d-58033074d745)
 
-  ```ansible-playbook -i hosts install-codeigniter.yml -k```
-  ```ansible-playbook -i hosts install-wordpress.yml -k```
-  ```ansible-playbook -i hosts install-yii.yml -k```
+  - ```ansible-playbook -i hosts install-codeigniter.yml -k```
+  - ```ansible-playbook -i hosts install-wordpress.yml -k```
+  - ```ansible-playbook -i hosts install-yii.yml -k```
   
   
 - Check the script and restart the nginx.
