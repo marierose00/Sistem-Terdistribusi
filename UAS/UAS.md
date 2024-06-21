@@ -2335,3 +2335,7 @@
   sudo service nginx restart
   ```
 
+- Laravel
+  ![laravel](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/332e7357-b929-435d-9dec-9493764a82b9)
+
+
