@@ -2331,14 +2331,9 @@
   ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/273e3a52-fae1-4e2a-b12d-58033074d745)
 
   ```ansible-playbook -i hosts install-codeigniter.yml -k```
-  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/68c99d1d-f1ac-49e7-9d5a-e2551db57c04)
-
   ```ansible-playbook -i hosts install-wordpress.yml -k```
-  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/b4c2a9d9-6eca-4f34-80d6-74d204463f49)
-
   ```ansible-playbook -i hosts install-yii.yml -k```
-  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/9205bd9d-dd4b-4df0-8fb7-436a0b22eab6)
-
+  
   
 - Check the script and restart the nginx.
 
