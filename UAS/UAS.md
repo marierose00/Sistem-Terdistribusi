@@ -2020,26 +2020,22 @@
 
     ```
     [laravel]
-    laravel ansible_host=lxc_laravel.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_1L ansible_host=lxc_php7_1L.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_2L ansible_host=lxc_php7_2L.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_4L ansible_host=lxc_php7_4L.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_6L ansible_host=lxc_php7_6L.dev ansible_ssh_user=root ansible_become_pass=1
     
     [codeigniter]
-    codeigniter ansible_host=lxc_codeigniter.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php5_1 ansible_host=lxc_php5_1.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php5_2 ansible_host=lxc_php5_2.dev ansible_ssh_user=root ansible_become_pass=1
     
     [wordpress]
-    wordpress ansible_host=lxc_wordpress.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_2W ansible_host=lxc_php7_2W.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_3W ansible_host=lxc_php7_3W.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_4W ansible_host=lxc_php7_4W.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_5W ansible_host=lxc_php7_5W.dev ansible_ssh_user=root ansible_become_pass=1
     
     [yii]
-    yii ansible_host=lxc_yii.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_1Y ansible_host=lxc_php7_1Y.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_2Y ansible_host=lxc_php7_2Y.dev ansible_ssh_user=root ansible_become_pass=1
     lxc_php7_4Y ansible_host=lxc_php7_4Y.dev ansible_ssh_user=root ansible_become_pass=1
@@ -2060,7 +2056,7 @@
         destdir: '/var/www/html/ci'
         domain: 'lxc_codeigniter.dev'
       roles:
-        - app
+        - codeigniter
     
     - hosts: lxc_php5_1
       vars:
@@ -2068,7 +2064,7 @@
         destdir: '/var/www/html/ci'
         domain: 'lxc_php5_1.dev'
       roles:
-        - app
+        - codeigniter
     
     - hosts: lxc_php5_2
       vars:
@@ -2076,7 +2072,7 @@
         destdir: '/var/www/html/ci'
         domain: 'lxc_php5_2.dev'
       roles:
-        - app
+        - codeigniter
     ```
 
   - Buat file bernama install-laravel.yml `nano install-laravel.yml` dan ketik skrip seperti di bawah ini.
