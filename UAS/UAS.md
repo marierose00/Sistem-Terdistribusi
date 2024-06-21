@@ -2327,11 +2327,11 @@
   ```ansible-playbook -i hosts install-mariadb.yml -k```
   ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/508d4a87-25d8-401a-a40e-3076ded83cbf)
 
+  ```ansible-playbook -i hosts install-laravel.yml -k```
+  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/273e3a52-fae1-4e2a-b12d-58033074d745)
+
   ```ansible-playbook -i hosts install-codeigniter.yml -k```
   ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/68c99d1d-f1ac-49e7-9d5a-e2551db57c04)
-
-  ```ansible-playbook -i hosts install-laravel.yml -k```
-  ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/4e9b97ed-e943-49db-880e-941b374fab2e)
 
   ```ansible-playbook -i hosts install-wordpress.yml -k```
   ![image](https://github.com/marieroseoo/Sistem-Terdistribusi/assets/150213177/b4c2a9d9-6eca-4f34-80d6-74d204463f49)
