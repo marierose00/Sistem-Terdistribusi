@@ -2050,14 +2050,6 @@
 
     ```
     ---
-    - hosts: codeigniter
-      vars:
-        git_url: 'https://github.com/aldonesia/sas-ci'
-        destdir: '/var/www/html/ci'
-        domain: 'lxc_codeigniter.dev'
-      roles:
-        - codeigniter
-    
     - hosts: lxc_php5_1
       vars:
         git_url: 'https://github.com/aldonesia/sas-ci'
@@ -2079,15 +2071,6 @@
 
     ```
     ---
-    - hosts: laravel
-      vars:
-        username: 'admin'
-        password: 'admin'
-        domain: 'lxc_laravel.dev'
-      roles:
-        - php
-        - laravel
-    
     - hosts: lxc_php7_1L
       vars:
         username: 'admin'
@@ -2142,14 +2125,6 @@
 
     ```
     ---
-    - hosts: wordpress
-      vars:
-        username: 'admin'
-        password: 'admin'
-        domain: 'lxc_wordpress.dev'
-      roles:
-        - wordpress
-    
     - hosts: lxc_php7_2W
       vars:
         username: 'admin'
@@ -2187,15 +2162,6 @@
 
     ```
     ---
-    - hosts: yii
-      vars:
-        username: 'admin'
-        password: 'admin'
-        domain: 'lxc_yii.dev'
-      roles:
-        - php
-        - yii
-    
     - hosts: lxc_php7_1Y
       vars:
         username: 'admin'
